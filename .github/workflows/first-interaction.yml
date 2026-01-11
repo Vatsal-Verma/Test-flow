@@ -20,22 +20,10 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
             👋 Hi @{{ github.actor }}!
-            Welcome to the **Accord Project** 🎉  
-            Thanks for opening your **first issue** — we’re excited to have you contributing to the future of smart legal agreements 🚀
-
-            ![Welcome to Accord Project](https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif)
-
-            A maintainer from the Accord Project team will review this soon.  
-            Feel free to add more details or context if needed — every bit helps! 🙌
-
+            Thanks for opening your first issue in this repository 🎉
+            A maintainer will look into it soon.
 
           pr-message: |
-            👋 Hi @{{ github.actor }}!
-            Welcome to the **Accord Project** 🎉  
-            Thanks for opening your **first Pull Request** — we really appreciate your contribution to improving the project 🚀
-
-            ![Thanks for your PR](https://media.giphy.com/media/26u4nJPf0JtQPdStq/giphy.gif)
-
-            A maintainer will review your PR soon.  
-            If there’s anything you’d like to clarify or improve in the meantime, feel free to update the PR — happy collaborating! 🙌
-
+            🎉 Hi @{{ github.actor }}!
+            Thanks for submitting your first Pull Request 🚀
+            We really appreciate your contribution!
