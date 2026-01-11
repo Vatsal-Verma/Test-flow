@@ -29,23 +29,42 @@ jobs:
             const repo = `${context.repo.owner}/${context.repo.repo}`;
             const currentNumber = context.issue.number;
 
-            // Build correct query
             const query = isPR
               ? `repo:${repo} is:pr author:${author}`
               : `repo:${repo} is:issue author:${author}`;
 
             const { data } = await github.rest.search.issuesAndPullRequests({ q: query });
 
-            // Exclude the current PR / Issue
             const previousItems = data.items.filter(
               item => item.number !== currentNumber
             );
 
-            // If nothing existed before, this is the first one
             if (previousItems.length === 0) {
               const message = isPR
-                ? `🎉 **Welcome @${author}!**\n\nThank you for submitting your **first Pull Request** to this repository 🚀\n\nWe really appreciate you taking the time to contribute. A maintainer will review your changes soon — feel free to respond to any feedback or questions.\n\n![Thank you](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWZsZ3ZlNHZyY2FjZ3YxN2I4MWZ3Y2NwNnNhd2VhY2k3d2k4eG9yZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o6Zt481isNVuQI1l6/giphy.gif)`
-                : `👋 **Hi @${author}, welcome!**\n\nThanks for opening your **first issue** 🎉\n\nWe appreciate you helping improve this project by reporting problems or suggesting enhancements. A maintainer will take a look shortly.\n\n![Welcome](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGx0bWw2M3p6bXQ5cWl2a2V1aXBzN3l6eHJzMWR5b3RzZzN1aWk5diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ASd0Ukj0y3qMM/giphy.gif)`;
+                ? `🎉 **Welcome @${author}!**<br><br>
+                   Congratulations on submitting your very first Pull Request 🚀  
+                   We’re excited to have you contributing to this project.<br><br>
+
+                   Please feel free to respond to any review comments or ask questions — we’re happy to help!<br><br>
+
+                   <a href="https://github.com/${repo}" target="_blank">
+                     <picture>
+                       <img width="600"
+                         src="https://raw.githubusercontent.com/Vatsal-Verma/test/main/.github/images/welcome.svg"
+                         alt="Welcome banner">
+                     </picture>
+                   </a>`
+                : `👋 **Hi @${author}, welcome!**<br><br>
+                   Thanks for opening your very first issue 🎉  
+                   Your feedback helps make this project better for everyone.<br><br>
+
+                   A maintainer will review this shortly. Thanks for taking the time to contribute!<br><br>
+
+                   <picture>
+                     <img width="600"
+                       src="https://raw.githubusercontent.com/Vatsal-Verma/test/main/.github/images/welcome.svg"
+                       alt="Welcome banner">
+                   </picture>`;
 
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
